@@ -3,35 +3,91 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Grounded in Time: A Multi-Source Dataset and Benchmark for Temporal Grounding in Robotic Manipulation. Benchmark source code and dataset downloads.">
+  <meta name="description" content="Grounded in Time: A Multi-Source Dataset and Benchmark for Temporal Grounding in Robotic Manipulation. Read the paper, explore the GiT benchmark and dataset, and watch the project video.">
   <title>Grounded in Time: A Multi-Source Dataset and Benchmark for Temporal Grounding in Robotic Manipulation</title>
+  <link rel="canonical" href="https://kk-stephen.github.io/grounded-in-time/">
   <style>
     :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #14243a; background: #f7f9fc; }
     * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 3rem 1.5rem; }
-    main { width: min(100%, 58rem); text-align: center; }
-    .mark { display: inline-block; margin: 0 0 2rem; color: #1668ab; font-size: 1.25rem; font-weight: 700; letter-spacing: .04em; }
+    body { margin: 0; padding: 3.5rem 1.5rem 3rem; }
+    main { width: min(100%, 72rem); margin: 0 auto; }
+    header { text-align: center; }
+    .mark { display: inline-block; margin: 0 0 1.5rem; color: #1668ab; font-size: 1.25rem; font-weight: 700; letter-spacing: .04em; }
     h1 { margin: 0; font-size: clamp(2.5rem, 7vw, 4.75rem); line-height: 1.12; font-weight: 750; letter-spacing: -.035em; overflow-wrap: break-word; }
     h1 span { display: block; max-width: 46rem; margin: 1.35rem auto 0; font-size: clamp(1.3rem, 3vw, 1.9rem); font-weight: 450; line-height: 1.45; letter-spacing: -.012em; }
-    .resources { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; margin: 2.5rem 0 0; }
-    .resources a { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .75rem 1.1rem; border: 1px solid #1668ab; border-radius: .6rem; color: #1668ab; background: #fff; font-size: 1rem; font-weight: 600; line-height: 1.4; text-decoration: none; }
-    .resources a:first-child { color: #fff; background: #1668ab; }
-    .resources a:hover { color: #fff; background: #10548c; border-color: #10548c; }
-    .resources a:focus-visible { outline: 3px solid #14243a; outline-offset: 4px; }
-    .status { margin: 1.5rem 0 0; color: #586577; font-size: 1rem; line-height: 1.6; }
+    .resources { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem; margin: 2rem 0 2.5rem; }
+    .badge { display: inline-flex; min-height: 2.75rem; align-items: stretch; border-radius: 5px; color: #fff; font-size: 1rem; font-weight: 600; line-height: 1.4; text-decoration: none; box-shadow: 0 1px 2px #14243a18; transition: transform .15s ease, filter .15s ease; }
+    .badge-label, .badge-value { display: inline-flex; align-items: center; justify-content: center; padding: .5rem .65rem; white-space: nowrap; }
+    .badge-label { gap: .4rem; border-radius: 5px 0 0 5px; background: #555; }
+    .badge-value { border-radius: 0 5px 5px 0; background: #007eae; }
+    .badge-code .badge-value { background: #17191c; }
+    .badge-paper .badge-value { background: #b31b1b; }
+    .badge-hf .badge-value { background: #f0c800; color: #262100; }
+    .badge:hover { filter: brightness(1.09); transform: translateY(-1px); }
+    .badge:focus-visible { outline: 3px solid #1668ab; outline-offset: 4px; }
+    .icon { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
+    .emoji { font-size: 1.15rem; line-height: 1; }
+    .video-section { max-width: 64rem; margin: 0 auto; }
+    video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #101820; border-radius: 12px; box-shadow: 0 8px 30px #14243a16; }
+    .video-note { margin: .85rem 0 0; text-align: center; color: #586577; font-size: .875rem; line-height: 1.6; }
+    .abstract { max-width: 52rem; margin: 3.25rem auto 0; }
+    h2 { margin: 0 0 1.25rem; text-align: center; font-size: 2rem; letter-spacing: -.025em; }
+    .abstract p { margin: 0 0 1.1rem; color: #34445a; font-size: 1.0625rem; line-height: 1.85; }
+    .abstract a, .video-note a { color: #1668ab; text-underline-offset: .2em; }
+    .abstract .source { margin-top: 1.5rem; font-size: .875rem; color: #586577; }
+    footer { max-width: 52rem; margin: 2.5rem auto 0; padding-top: 1.25rem; border-top: 1px solid #dfe5ed; color: #687588; text-align: center; font-size: .875rem; }
+    @media (max-width: 600px) {
+      body { padding: 2rem 1rem; }
+      .resources { gap: .5rem; margin: 1.5rem 0 2rem; }
+      .badge { font-size: .875rem; }
+      .badge-label, .badge-value { padding: .5rem .55rem; }
+      .abstract { margin-top: 2.5rem; }
+      .abstract p { font-size: 1rem; line-height: 1.75; }
+      video { border-radius: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .badge { transition: none; } .badge:hover { transform: none; } }
   </style>
 </head>
 <body>
   <main>
-    <p class="mark">GiT</p>
-    <h1>Grounded in Time<span>A Multi-Source Dataset and Benchmark for Temporal Grounding in Robotic Manipulation</span></h1>
-    <nav class="resources" aria-label="Project resources">
-      <a href="https://github.com/xgq2005/GiTBench">Benchmark Code (GitHub)</a>
-      <a href="https://huggingface.co/datasets/XGQ12345/GiT_hdf5">Dataset (Hugging Face)</a>
-      <a href="https://www.modelscope.cn/datasets/xgq12345/GIT_hdf5">Dataset (ModelScope)</a>
-    </nav>
-    <p class="status">More project details coming soon.</p>
-    <!-- Add the abstract, authors, paper, dataset, and benchmark here when ready. -->
+    <header>
+      <p class="mark">GiT</p>
+      <h1>Grounded in Time<span>A Multi-Source Dataset and Benchmark for Temporal Grounding in Robotic Manipulation</span></h1>
+      <nav class="resources" aria-label="Project resources">
+        <a class="badge" href="https://kk-stephen.github.io/grounded-in-time/" aria-label="GiT project website" aria-current="page">
+          <span class="badge-label"><span class="emoji" aria-hidden="true">🌐</span>Website</span><span class="badge-value">GiT</span>
+        </a>
+        <a class="badge badge-code" href="https://github.com/xgq2005/GiTBench" target="_blank" rel="noopener noreferrer" aria-label="Benchmark source code on GitHub (opens in a new tab)">
+          <span class="badge-label"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 1.72 2.63 1.22 3.27.93.1-.72.4-1.22.71-1.5-2.5-.29-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15A10.8 10.8 0 0 1 12 6.15c.96 0 1.92.13 2.82.38 2.15-1.46 3.1-1.15 3.1-1.15.62 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.33-2.64 5.28-5.15 5.56.4.35.76 1.04.76 2.1v3.09c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z"/></svg>GitHub</span><span class="badge-value">Code</span>
+        </a>
+        <a class="badge badge-paper" href="https://arxiv.org/abs/2610.04255" target="_blank" rel="noopener noreferrer" aria-label="Read the paper on arXiv (opens in a new tab)">
+          <span class="badge-label"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m5 3 14 18M19 3 5 21M4 4l4 1M16 19l4 1"/></svg>arXiv</span><span class="badge-value">Paper</span>
+        </a>
+        <a class="badge badge-hf" href="https://huggingface.co/datasets/XGQ12345/GiT_hdf5" target="_blank" rel="noopener noreferrer" aria-label="GiT dataset on Hugging Face (opens in a new tab)">
+          <span class="badge-label"><span class="emoji" aria-hidden="true">🤗</span>HuggingFace</span><span class="badge-value">Dataset</span>
+        </a>
+        <a class="badge" href="https://www.modelscope.cn/datasets/xgq12345/GIT_hdf5" target="_blank" rel="noopener noreferrer" aria-label="GiT dataset on ModelScope (opens in a new tab)">
+          <span class="badge-label">ModelScope</span><span class="badge-value">Dataset</span>
+        </a>
+      </nav>
+    </header>
+
+    <section class="video-section" aria-label="GiT project demonstration video">
+      <video id="project-video" autoplay muted loop playsinline controls preload="metadata" aria-label="Grounded in Time project demonstration">
+        <source src="icra_git.mp4" type="video/mp4">
+        Your browser does not support embedded video. <a href="icra_git.mp4">Download the GiT demonstration video.</a>
+      </video>
+      <p class="video-note">Project video · Plays on a loop, muted by default. Use the controls to pause or enable sound.</p>
+    </section>
+
+    <section class="abstract" aria-labelledby="abstract-title">
+      <h2 id="abstract-title">Abstract</h2>
+      <p>Robotic manipulation often requires inferring task-relevant states from past interactions when the current observation alone is insufficient to determine the appropriate action. Despite progress in benchmarking memory-augmented vision-language-action (VLA) models, application-oriented tasks requiring history-dependent semantic inference remain underrepresented.</p>
+      <p>We introduce GiT (Grounded in Time), a dataset and benchmark for grounding manipulation decisions in past events across biolaboratory, household, and industrial scenarios. It includes real-robot and Universal Manipulation Interface (UMI) style demonstrations covering 18 bimanual tasks, together with simulation data and a ManiSkill-based evaluation suite covering nine tasks.</p>
+      <p>Fine-grained subtask annotations and annotated counterfactual task pairs, in which similar current observations require different actions depending on prior events, support policy learning and targeted evaluation of history use. Evaluations of representative end-to-end VLA models in simulation and on selected real-world tasks reveal substantial room for improvement in history-dependent manipulation. The dataset and benchmark are available at the project page.</p>
+      <p class="source">From <a href="https://arxiv.org/abs/2610.04255" target="_blank" rel="noopener noreferrer">arXiv:2610.04255</a>.</p>
+    </section>
+    <footer>GiT · Grounded in Time</footer>
   </main>
 </body>
 </html>
